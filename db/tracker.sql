@@ -16,4 +16,4 @@ CREATE TABLE transactions(
   id SERIAL8 primary key,
   merchant_id INT8 references merchants(id),
   tag_id INT8 references tags(id)
-)
+);
