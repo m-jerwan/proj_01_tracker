@@ -21,6 +21,11 @@ merchant_05 = Merchant.new({
   "merchant_name" => "Jamies Italian"
 })
 
+merchant_01.save()
+merchant_02.save()
+merchant_03.save()
+merchant_04.save()
+
 #-----------------------------------TAGS:
 tag_01 = Tag.new({
   "tag_name" => "groceries"
@@ -43,5 +48,14 @@ transaction_01 = Transaction.new({
   "merchant_id" => merchant_03.id,
   "tag_id" => tag_04.id
 })
-binding.pry
-p transaction_01
+
+
+
+#-----------------------------------OTHER:
+
+
+
+
+
+# binding.pry
+nil
