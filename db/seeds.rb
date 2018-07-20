@@ -2,6 +2,10 @@ require_relative('../models/merchant.rb')
 require_relative('../models/transaction.rb')
 require_relative('../models/tag.rb')
 require( 'pry-byebug' )
+#-----------------------------------PREP:
+Transaction.delete_all
+Merchant.delete_all
+Tag.delete_all
 
 
 #-----------------------------------MERCHANTS:
@@ -25,7 +29,6 @@ merchant_01.save()
 merchant_02.save()
 merchant_03.save()
 merchant_04.save()
-
 #-----------------------------------TAGS:
 tag_01 = Tag.new({
   "tag_name" => "groceries"
@@ -43,16 +46,29 @@ tag_05 = Tag.new({
   "tag_name" => "food and drink"
 })
 
+tag_01.save
+tag_02.save
+tag_03.save
+tag_04.save
 #-----------------------------------TRANSACTIONS:
 transaction_01 = Transaction.new({
   "merchant_id" => merchant_03.id,
   "tag_id" => tag_04.id
 })
+transaction_02 = Transaction.new({
+  "merchant_id" => merchant_01.id,
+  "tag_id" => tag_01.id
+})
+transaction_03 = Transaction.new({
+  "merchant_id" => merchant_04.id,
+  "tag_id" => tag_02.id
+})
 
-
+transaction_01.save
+transaction_02.save
+transaction_03.save
 
 #-----------------------------------OTHER:
-
 
 
 

@@ -3,15 +3,13 @@ require( 'pry-byebug' )
 
 
 class Merchant
-attr_reader :id
-attr_writer :merchant_name
+  attr_reader :id
+  attr_writer :merchant_name
 
   def initialize(options)
     @id = options['id'].to_i if options['id']
     @merchant_name = options['merchant_name']
   end
-
-
   def save
     sql = "INSERT INTO merchants(merchant_name) VALUES ($1) RETURNING id"
     values = [@merchant_name]
@@ -43,6 +41,12 @@ attr_writer :merchant_name
   def delete
     sql = "DELETE FROM merchants WHERE id = $1"
     values = [@id]
+    SqlRunner.run(sql, values)
+  end
+
+  def self.delete_by(id)
+    sql = "DELETE FROM merchants WHERE id = $1"
+    values = [id]
     SqlRunner.run(sql, values)
   end
 
