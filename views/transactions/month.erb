@@ -1,11 +1,16 @@
+<%require( 'pry-byebug' )%>
 
 <h1>Transactions</h1>
+<%@month_minus_one_no = (@this_month_no.to_i - 1).to_s%>
 
-<p><%=@now.strftime("%-B")%></p>
+<p> <a href="/transactions"> <%=@now.strftime("%-B")%> </a> </p>
 <%last_month = @now.prev_month%>
-<p> <a href="transactions/<%=last_month.strftime("%-m")%>"> <%=last_month.strftime("%-B")%> </a> </p>
+<p> <a href="<%=last_month.strftime("%-m")%>"> <%=last_month.strftime("%-B")%> </a> </p>
 <%two_months_before = last_month.prev_month%>
-<p> <a href="transactions/<%=two_months_before.strftime("%-m")%>"> <%=two_months_before.strftime("%-B")%> </a> </p>
+<p> <a href="<%=two_months_before.strftime("%-m")%>"> <%=two_months_before.strftime("%-B")%> </a> </p>
+
+
+
 
 <table>
   <tr>
@@ -20,7 +25,7 @@
     <th>Tag</th>
   </tr>
   <% for transaction in @transactions %>
-    <% if transaction.time_stamp.strftime("%-m") == @now.strftime("%-m") %>
+    <% if transaction.time_stamp.strftime("%-m") == @month_on_page %>
       <tr>
         <td><%= transaction.time_stamp.strftime("%H:%M") %></td>
         <td>|</td>

@@ -2,23 +2,21 @@ require 'date'
 require_relative('../models/transaction.rb')
 require( 'pry-byebug' )
 
+
 get '/transactions' do
-  transactions = Transaction.all()
-  now = DateTime.now
+  @transactions = Transaction.all()
 
-  #compare all transactions months to this month and get only with this months month
-  this_month_no = now.strftime("%-m")
-  @transactions_this_month =[]
-  for transaction in transactions
-    @transactions_this_month << transaction if transaction.time_stamp.strftime("%-m") == this_month_no
-  end
-
-  last_month = (this_month_no.to_i - 1).to_s
-  @transactions_month_minus_one =[]
-  for transaction in transactions
-    @transactions_month_minus_one << transaction if transaction.time_stamp.strftime("%-m") == last_month
-  end
-
+  @now = DateTime.now
+  @this_month_no = @now.strftime("%-m")
+  @month_minus_one_no = (@this_month_no.to_i - 1).to_s
 
   erb (:"transactions/index")
+end
+
+get '/transactions/:month' do
+  @month_on_page = params['month']
+
+  @transactions = Transaction.all()
+  @now = DateTime.now
+  erb (:"transactions/month")
 end
