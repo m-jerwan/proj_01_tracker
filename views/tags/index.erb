@@ -1,3 +1,8 @@
-<h1>All tags:</h1>
+<h1>Available tags:</h1>
 
-<p> <%=@tags[0].id%> </p>
+
+<%counter = 1%>
+<% for tag in @tags %>
+  <p><%=counter%>. <a href="tags/<%=tag.id%>"><%= tag.tag_name.capitalize %></a></p>
+  <%counter += 1%>
+<% end %>

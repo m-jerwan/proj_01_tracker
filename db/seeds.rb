@@ -29,11 +29,6 @@ merchant_01.save()
 merchant_02.save()
 merchant_03.save()
 merchant_04.save()
-merchants = Merchant.all()
-
-for merchant in merchants
-p merchant.merchant_name
-end
 #-----------------------------------TAGS:
 tag_01 = Tag.new({
   "tag_name" => "groceries"
@@ -57,14 +52,17 @@ tag_03.save
 tag_04.save
 #-----------------------------------TRANSACTIONS:
 transaction_01 = Transaction.new({
+  "amount" => "110.40",
   "merchant_id" => merchant_03.id,
   "tag_id" => tag_04.id
 })
 transaction_02 = Transaction.new({
+  "amount" => "4.99",
   "merchant_id" => merchant_01.id,
   "tag_id" => tag_01.id
 })
 transaction_03 = Transaction.new({
+  "amount" => "50.11",
   "merchant_id" => merchant_04.id,
   "tag_id" => tag_02.id
 })
@@ -72,7 +70,6 @@ transaction_03 = Transaction.new({
 transaction_01.save
 transaction_02.save
 transaction_03.save
-
 #-----------------------------------OTHER:
 
 

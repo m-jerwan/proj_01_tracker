@@ -1,1 +1,9 @@
+<%require( 'pry-byebug' )%>
+
 <h1>Test transactions</h1>
+
+<%counter = 1%>
+<% for transaction in @transactions %>
+  <p><%=counter%>. <%= transaction.amount %></p>
+  <%counter += 1%>
+<% end %>
