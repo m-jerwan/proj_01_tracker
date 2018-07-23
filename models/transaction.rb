@@ -13,6 +13,22 @@ class Transaction
     @time_stamp = options['time_stamp']
   end
 
+
+
+  #------------------------------------------~OTHER:
+
+  def find_merchant
+    #find merchant with id i have
+    return Merchant.find(@merchant_id)
+  end
+
+  def find_tag
+    #find merchant with id i have
+    return Tag.find(@tag_id)
+  end
+
+  #------------------------------------------~CRUD:
+
   def save
     sql = "INSERT INTO transactions(amount, merchant_id, tag_id) VALUES ($1, $2, $3) RETURNING id"
     values = [@amount, @merchant_id, @tag_id]
@@ -50,8 +66,6 @@ class Transaction
     SqlRunner.run(sql)
   end
 
-
-#------------------------------------------~OTHER:
 
 
 

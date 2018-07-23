@@ -1,9 +1,27 @@
-<%require( 'pry-byebug' )%>
 
-<h1>Test transactions</h1>
 
-<%counter = 1%>
-<% for transaction in @transactions %>
-  <p><%=counter%>. <%= transaction.amount %></p>
-  <%counter += 1%>
-<% end %>
+<h1>Transactions</h1>
+
+
+<table>
+  <tr>
+    <th>Date</th>
+    <th></th>
+    <th>Amount</th>
+    <th></th>
+    <th>Merchant</th>
+    <th></th>
+    <th>Tag</th>
+  </tr>
+  <% for transaction in @transactions %>
+  <tr>
+    <td><%= "Date" %></td>
+    <td>|</td>
+    <td><%= transaction.amount %></td>
+    <td>|</td>
+    <td><a href="/merchants"> <%= transaction.find_merchant.merchant_name %></a></td>
+    <td>|</td>
+    <td><a href="/tags"><%= transaction.find_tag.tag_name.capitalize %></a></td>
+  </tr>
+  <% end %>
+</table>

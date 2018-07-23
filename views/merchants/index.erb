@@ -3,6 +3,6 @@
 
 <%counter = 1%>
 <% for merchant in @merchants %>
-  <p><%=counter%>. <a href="merchants/<%=merchant.id%>"><%= merchant.merchant_name %></a></p>
+  <p><%=counter%>. <%= merchant.merchant_name %></p>
   <%counter += 1%>
 <% end %>

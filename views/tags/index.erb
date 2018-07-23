@@ -3,6 +3,6 @@
 
 <%counter = 1%>
 <% for tag in @tags %>
-  <p><%=counter%>. <a href="tags/<%=tag.id%>"><%= tag.tag_name.capitalize %></a></p>
+  <p><%=counter%>. <%= tag.tag_name.capitalize %></p>
   <%counter += 1%>
 <% end %>
