@@ -3,13 +3,14 @@ require( 'pry-byebug' )
 
 
 class Merchant
-  attr_reader :id
-  attr_writer :merchant_name
+  attr_reader :id, :merchant_name
+  # attr_accessor :merchant_name
 
   def initialize(options)
     @id = options['id'].to_i if options['id']
     @merchant_name = options['merchant_name']
   end
+
   def save
     sql = "INSERT INTO merchants(merchant_name) VALUES ($1) RETURNING id"
     values = [@merchant_name]

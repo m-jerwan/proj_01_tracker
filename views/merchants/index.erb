@@ -1,1 +1,8 @@
-<h1>Test</h1>
+<h1>Available merchants:</h1>
+
+
+<%counter = 1%>
+<% for merchant in @merchants %>
+  <p><%=counter%>. <a href="merchants/<%=merchant.id%>"><%= merchant.merchant_name %></a></p>
+  <%counter += 1%>
+<% end %>

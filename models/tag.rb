@@ -1,8 +1,7 @@
 require_relative('../db/sqlRunner.rb')
 
 class Tag
-  attr_reader :id
-  attr_writer :tag_name
+  attr_accessor :id, :tag_name
 
   def initialize(options)
     @id = options['id']

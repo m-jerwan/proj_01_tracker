@@ -29,6 +29,11 @@ merchant_01.save()
 merchant_02.save()
 merchant_03.save()
 merchant_04.save()
+merchants = Merchant.all()
+
+for merchant in merchants
+p merchant.merchant_name
+end
 #-----------------------------------TAGS:
 tag_01 = Tag.new({
   "tag_name" => "groceries"
