@@ -13,6 +13,7 @@ CREATE TABLE tags(
 );
 
 CREATE TABLE transactions(
+  time_stamp VARCHAR(255),   -- TIME IS BEING SEND TO SQL AS STRING
   amount FLOAT,
   id SERIAL8 primary key,
   merchant_id INT8 references merchants(id),

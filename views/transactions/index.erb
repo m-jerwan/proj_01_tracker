@@ -5,7 +5,7 @@
 
 <table>
   <tr>
-    <th>Date</th>
+    <th>Time</th>
     <th></th>
     <th>Amount</th>
     <th></th>
@@ -15,7 +15,7 @@
   </tr>
   <% for transaction in @transactions %>
   <tr>
-    <td><%= "Date" %></td>
+    <td><%= transaction.time_stamp.strftime("%H:%M on %d.%m.%Y") %></td>
     <td>|</td>
     <td><%= transaction.amount %></td>
     <td>|</td>
