@@ -7,21 +7,53 @@
   <tr>
     <th>Time</th>
     <th></th>
+    <th>Date</th>
+    <th></th>
     <th>Amount</th>
     <th></th>
     <th>Merchant</th>
     <th></th>
     <th>Tag</th>
   </tr>
-  <% for transaction in @transactions %>
+  <% for transaction in @transactions_this_month %>
+    <tr>
+      <td><%= transaction.time_stamp.strftime("%H:%M") %></td>
+      <td>|</td>
+      <td><%= transaction.time_stamp.strftime("%d.%m.%Y") %></td>
+      <td>|</td>
+      <td><%= transaction.amount %></td>
+      <td>|</td>
+      <td><a href="/merchants"> <%= transaction.find_merchant.merchant_name %></a></td>
+      <td>|</td>
+      <td><a href="/tags"><%= transaction.find_tag.tag_name.capitalize %></a></td>
+    </tr>
+    <%end%>
+</table>
+
+
+<table>
   <tr>
-    <td><%= transaction.time_stamp.strftime("%H:%M on %d.%m.%Y") %></td>
-    <td>|</td>
-    <td><%= transaction.amount %></td>
-    <td>|</td>
-    <td><a href="/merchants"> <%= transaction.find_merchant.merchant_name %></a></td>
-    <td>|</td>
-    <td><a href="/tags"><%= transaction.find_tag.tag_name.capitalize %></a></td>
+    <th>Time</th>
+    <th></th>
+    <th>Date</th>
+    <th></th>
+    <th>Amount</th>
+    <th></th>
+    <th>Merchant</th>
+    <th></th>
+    <th>Tag</th>
   </tr>
-  <% end %>
+  <% for transaction in @transactions_month_minus_one %>
+    <tr>
+      <td><%= transaction.time_stamp.strftime("%H:%M") %></td>
+      <td>|</td>
+      <td><%= transaction.time_stamp.strftime("%d.%m.%Y") %></td>
+      <td>|</td>
+      <td><%= transaction.amount %></td>
+      <td>|</td>
+      <td><a href="/merchants"> <%= transaction.find_merchant.merchant_name %></a></td>
+      <td>|</td>
+      <td><a href="/tags"><%= transaction.find_tag.tag_name.capitalize %></a></td>
+    </tr>
+    <%end%>
 </table>

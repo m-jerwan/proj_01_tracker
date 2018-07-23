@@ -52,13 +52,13 @@ tag_03.save
 tag_04.save
 #-----------------------------------TRANSACTIONS:
 transaction_01 = Transaction.new({
-  "time_stamp" => "2018-05-01 20:20:00",
+  "time_stamp" => "2018-06-01 20:20:00",
   "amount" => "110.40",
   "merchant_id" => merchant_03.id,
   "tag_id" => tag_04.id
 })
 transaction_02 = Transaction.new({
-  "time_stamp" => "2018-06-01 16:15:00",
+  "time_stamp" => "2018-07-01 16:15:00",
   "amount" => "4.99",
   "merchant_id" => merchant_01.id,
   "tag_id" => tag_01.id
@@ -78,7 +78,7 @@ p Transaction.all
 #-----------------------------------OTHER:
 
 
-
+p this_month = DateTime.now.strftime("%m")
 
 # binding.pry
 nil
