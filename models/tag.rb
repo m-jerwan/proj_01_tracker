@@ -30,6 +30,14 @@ class Tag
     return result
   end
 
+  def self.find_by_tag_name(tag_name)
+    sql = "SELECT * FROM tags WHERE tag_name = $1"
+    values = [tag_name]
+    hash = SqlRunner.run(sql, values).first
+    result =  Tag.new(hash)
+    return result
+  end
+
   def update
     sql = "UPDATE tags SET tag_name = $1 WHERE id = $2"
     values = [@tag_name, @id]

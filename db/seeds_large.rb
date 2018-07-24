@@ -41,14 +41,14 @@ Tag.delete_all
     "Apple"
   ],
   "merchants_fuel" => [
-    "Morrisons",
-    "Asda",
-    "Tesco",
+    "Morrisons Fuel",
+    "Asda Fuel",
+    "Tesco Fuel",
     "Shell",
     "Bp"
   ],
   "merchants_food_and_drink" => [
-    "McDonnalds",
+    "McDonalds",
     "Kfc",
     "Brewers Fayre",
     "Wildfire",
@@ -66,6 +66,26 @@ Tag.delete_all
     "RBS ATM"
   ]
 }
+
+# @all_merchants["merchants_groceries"].each {|tag| Merchant.new(tag).save}
+def save_merchants(merchant_tag)
+  for element in @all_merchants[merchant_tag]
+    merchant = Merchant.new({
+      "merchant_name" => element
+      })
+      merchant.save
+    end
+  end
+
+# FIX: DRY IT!!
+save_merchants("merchants_groceries")
+save_merchants("merchants_misc")
+save_merchants("merchants_fuel")
+save_merchants("merchants_food_and_drink")
+save_merchants("merchants_bills")
+save_merchants("merchants_cash")
+
+
 #-----------------------------------TAGS:
 @all_tags = [
   "groceries",
@@ -75,6 +95,20 @@ Tag.delete_all
   "bills",
   "cash"
 ]
+
+def save_tags
+  for element in @all_tags
+    tag = Tag.new({
+      "tag_name" => element
+      })
+      tag.save
+    end
+  end
+
+save_tags()
+
+# @all_tags.each {|tag| Tag.new(tag).save}
+
 #-----------------------------------Dates:
 def random_date_time
 
@@ -138,16 +172,16 @@ times.times {|x|
   merchant_x = Merchant.new({
     "merchant_name" => result[0]
     })
-  merchant_x.save
+    merchant_id_to_pass = Merchant.find_by_merchant_name(result[0]).id.to_s
   tag_x = Tag.new({
     "tag_name" => result[1]
     })
-    tag_x.save
+    tag_id_to_pass = Tag.find_by_tag_name(tag).id.to_s
   transaction_x = Transaction.new({
     "time_stamp" => result[2],
     "amount" => result[3],
-    "merchant_id" => merchant_x.id,
-    "tag_id" => tag_x.id
+    "merchant_id" => merchant_id_to_pass,
+    "tag_id" => tag_id_to_pass
     })
   transaction_x.save
   }

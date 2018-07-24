@@ -37,10 +37,10 @@ class Transaction
   end
 
   def self.all
-    sql = "SELECT * FROM transactions"
+    sql = "SELECT * FROM transactions ORDER BY time_stamp"
     hashes = SqlRunner.run(sql)
     result = hashes.map { |e| Transaction.new(e)}
-    return result
+    return result   #  CHECKED, COMES BACK ORDERED!!
   end
 
   def self.find(id)
@@ -66,7 +66,6 @@ class Transaction
     SqlRunner.run(sql)
   end
 
-
-
-
 end
+
+Transaction.all

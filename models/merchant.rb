@@ -33,6 +33,14 @@ class Merchant
     return result
   end
 
+  def self.find_by_merchant_name(merchant_name)
+    sql = "SELECT * FROM merchants WHERE merchant_name = $1"
+    values = [merchant_name]
+    hash = SqlRunner.run(sql, values).first
+    result =  Merchant.new(hash)
+    return result
+  end
+
   def update
     sql = "UPDATE merchants SET merchant_name = $1 WHERE id = $2"
     values = [@merchant_name, @id]
