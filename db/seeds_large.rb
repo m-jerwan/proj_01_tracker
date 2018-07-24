@@ -113,11 +113,13 @@ save_tags()
 def random_date_time
 
   #rand rand_month
-  rand_month = Random.rand(1..12)
+  rand_month = Random.rand(1..7)  #BluePeter coz COMPARISING STILL TO FI
   #rand rand_day
   if rand_month == 2
     rand_day = Random.rand(1...28)
-  elsif rand_month == 1 || rand_month == 3 || rand_month == 5 || rand_month == 7 || rand_month == 8 || rand_month == 10 || rand_month == 12
+  elsif rand_month == 7
+    rand_day = Random.rand(1...24) #BluePeter coz COMPARISING STILL TO FI
+  elsif rand_month == 1 || rand_month == 3 || rand_month == 5 || rand_month == 8 || rand_month == 10 || rand_month == 12
     rand_day = Random.rand(1...31)
   else
     rand_day = Random.rand(1...30)
@@ -129,9 +131,9 @@ def random_date_time
   date_time = DateTime.parse("2018-#{rand_month}-#{rand_day} #{rand_time_h}:#{rand_time_m}:#{rand_time_s}")
 
   #if random_date_time > TODAY, do it again
-  if date_time.strftime('%Q') > DateTime.now.strftime('%Q')    ##this comparising is not working properly FIX!!!
-    random_date_time()
-  end
+#  if date_time.strftime('%Q') > DateTime.now.strftime('%Q')    ##this comparising is not working properly FIX!!!
+#    random_date_time()
+  # end
   return date_time
 end
 

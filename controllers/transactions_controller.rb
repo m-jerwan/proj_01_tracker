@@ -6,6 +6,7 @@ require( 'pry-byebug' )
 get '/transactions' do
   @transactions = Transaction.all()
   @now = DateTime.now
+  @month_back = @now.prev_month
   @this_month_no = @now.strftime("%-m")
   @month_minus_one_no = (@this_month_no.to_i - 1).to_s
 
@@ -17,5 +18,6 @@ get '/transactions/:month' do
 
   @transactions = Transaction.all()
   @now = DateTime.now
-  erb (:"transactions/month")
+  @month_back = @now.prev_month
+  erb (:"transactions/monthly/index")
 end

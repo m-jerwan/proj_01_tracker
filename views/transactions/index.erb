@@ -1,13 +1,14 @@
 <%require( 'pry-byebug' )%>
 
 <h1>Transactions</h1>
+<ul>
+<li><a href="/transactions"> <%=@now.strftime("%-B")%> </a> </li>
 
-<p><%=@now.strftime("%-B")%></p>
-
-<%last_month = @now.prev_month%>
-<p> <a href="transactions/<%=last_month.strftime("%-m")%>"> <%=last_month.strftime("%-B")%> </a> </p>
-<%two_months_before = last_month.prev_month%>
-<p> <a href="transactions/<%=two_months_before.strftime("%-m")%>"> <%=two_months_before.strftime("%-B")%> </a> </p>
+<%12.times do %>
+  <%  @month_back = @month_back.prev_month %>
+  <li> <a href="/transactions/<%=@month_back.strftime("%-m")%>"> <%=@month_back.strftime("%-B")%> </a> </li>
+<%end%>
+</ul>
 
 <table>
   <tr>
