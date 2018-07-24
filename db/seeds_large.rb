@@ -52,7 +52,7 @@ Tag.delete_all
     "Kfc",
     "Brewers Fayre",
     "Wildfire",
-    "Hipster_coffee_heaven",
+    "Hipster coffee heaven",
     "Pepper"
   ],
   "merchants_bills" => [

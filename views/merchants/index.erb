@@ -1,8 +1,13 @@
 <h1>Available merchants:</h1>
 
+<a href="/merchants/new">Create merchant</a>
 
 <%counter = 1%>
 <% for merchant in @merchants %>
   <p><%=counter%>. <%= merchant.merchant_name %></p>
+  <form class= "" action= "/merchants/<%=merchant.id%>/edit" method= "post">
+    <input type="submit" value= "Edit">
+  </form>
+
   <%counter += 1%>
 <% end %>

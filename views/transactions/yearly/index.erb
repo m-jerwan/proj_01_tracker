@@ -1,13 +1,16 @@
 <%require( 'pry-byebug' )%>
 
-<h1>Transactions</h1>
+<h1>Transactions Yearly View</h1>
 <ul>
-<li> <a href="/transactions/<%=@month_back.strftime('%-m')%>"> Monthly views </a> </li>
-<li> <a href="/transactions/year/<%=@month_back.strftime('%Y')%>"> Yearly views </a> </li>
+<li><a href="/transactions"> Back to transactions </a> </li>
+<% if @year_on_page.to_s < @now.strftime("%Y") %>
+<li><a href="/transactions/year/<%=@year_on_page.to_i+1%>"> <%=@year_on_page.to_i+1%></a> </li>
+<%end%>
+<li><a href="/transactions/year/<%=@year_on_page.to_i-1%>"> <%=@year_on_page.to_i-1%></a> </li>
+<li><a href="/transactions/year/<%=@year_on_page.to_i-2%>"> <%=@year_on_page.to_i-2%></a> </li>
 </ul>
 
-<h2><%=@now.strftime("%B")%></h2>
-
+<h2> <%=@year_on_page%></h2>
 
 <table>
   <tr>
@@ -22,8 +25,7 @@
     <th>Tag</th>
   </tr>
   <% for transaction in @transactions %>
-
-    <% if transaction.time_stamp.strftime("%-m") == @now.strftime("%-m") %>
+    <% if transaction.time_stamp.strftime("%Y") == @year_on_page %>
       <tr>
         <td><%= transaction.time_stamp.strftime("%H:%M") %></td>
         <td>|</td>

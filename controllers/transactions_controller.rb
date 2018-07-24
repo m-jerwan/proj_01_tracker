@@ -13,6 +13,13 @@ get '/transactions' do
   erb (:"transactions/index")
 end
 
+get '/transactions/year/:year' do
+  @transactions = Transaction.all()
+  @year_on_page = params['year']
+  @now = DateTime.now
+  erb (:"transactions/yearly/index")
+end
+
 get '/transactions/:month' do
   @month_on_page = params['month']
 
