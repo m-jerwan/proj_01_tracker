@@ -3,12 +3,11 @@
 <h1>Transactions</h1>
 <ul>
 <li><a href="/transactions"> <%=@now.strftime("%-B")%> </a> </li>
-
-<%12.times do %>
-  <%  @month_back = @month_back.prev_month %>
-  <li> <a href="/transactions/<%=@month_back.strftime("%-m")%>"> <%=@month_back.strftime("%-B")%> </a> </li>
-<%end%>
+<li> <a href="/transactions/<%=@month_back.strftime("%-m")%>"> Previous months </a> </li>
 </ul>
+
+<h2><%=@now.strftime("%B")%></h2>
+
 
 <table>
   <tr>

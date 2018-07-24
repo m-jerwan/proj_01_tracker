@@ -4,12 +4,13 @@
 <ul>
 <li><a href="/transactions"> <%=@now.strftime("%-B")%> </a> </li>
 
-<%12.times do %>
+<%6.times do %>
   <%  @month_back = @month_back.prev_month %>
   <li> <a href="<%=@month_back.strftime("%-m")%>"> <%=@month_back.strftime("%-B")%> </a> </li>
 <%end%>
 </ul>
 
+<h2><%=@month_on_page_word%></h2>
 
 <table>
   <tr>
