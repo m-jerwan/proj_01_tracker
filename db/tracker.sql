@@ -16,6 +16,6 @@ CREATE TABLE transactions(
   time_stamp VARCHAR(255),   -- TIME IS BEING SEND TO SQL AS STRING
   amount FLOAT,
   id SERIAL8 primary key,
-  merchant_id INT8 references merchants(id),
-  tag_id INT8 references tags(id)
+  merchant_id INT8 references merchants(id) ON DELETE CASCADE,
+  tag_id INT8 references tags(id) ON DELETE CASCADE
 );

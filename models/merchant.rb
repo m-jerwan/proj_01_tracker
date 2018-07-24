@@ -19,7 +19,7 @@ class Merchant
   end
 
   def self.all
-    sql = "SELECT * FROM merchants"
+    sql = "SELECT * FROM merchants ORDER BY merchant_name"
     hashes = SqlRunner.run(sql)
     result = hashes.map { |e| Merchant.new(e)}
     return result
