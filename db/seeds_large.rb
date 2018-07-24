@@ -6,13 +6,13 @@ require( 'pry-byebug' )
 require 'date'
 
 
-#time range?
+#time range
 #list of possible MERCHANTS:
 #list of possible TAGS
 
 #get random merchant / save
 #get random tag / save
-#get random float?
+#get random float
 #random time
 #create transacion based on those /save
 
@@ -20,10 +20,7 @@ require 'date'
 Transaction.delete_all
 Merchant.delete_all
 Tag.delete_all
-
 #-----------------------------------MERCHANTS:
-
-
 @all_merchants = {
   "merchants_groceries" => [
     "Asda",
@@ -69,9 +66,7 @@ Tag.delete_all
     "RBS ATM"
   ]
 }
-
 #-----------------------------------TAGS:
-
 @all_tags = [
   "groceries",
   "misc",
@@ -80,12 +75,11 @@ Tag.delete_all
   "bills",
   "cash"
 ]
-
 #-----------------------------------Dates:
 def random_date_time
 
   #rand rand_month
-    rand_month = Random.rand(1..12)
+  rand_month = Random.rand(1..12)
   #rand rand_day
   if rand_month == 2
     rand_day = Random.rand(1...28)
@@ -94,32 +88,74 @@ def random_date_time
   else
     rand_day = Random.rand(1...30)
   end
-  #rand time???
+  #rand time
   rand_time_h = Random.rand(1...23)
   rand_time_m = Random.rand(1...59)
   rand_time_s = Random.rand(1...59)
-
-  date_time = "2018-#{rand_month}-#{rand_day} #{rand_time_h}:#{rand_time_m}:#{rand_time_s}"
-  date_time =  DateTime.parse(date_time)
+  date_time = DateTime.parse("2018-#{rand_month}-#{rand_day} #{rand_time_h}:#{rand_time_m}:#{rand_time_s}")
 
   #if random_date_time > TODAY, do it again
-  random_date_time() if date_time.to_s > DateTime.now.to_s
-
+  if date_time.strftime('%Q') > DateTime.now.strftime('%Q')    ##this comparising is not working properly FIX!!!
+    random_date_time()
+  end
   return date_time
 end
 
-def randomize(type)
+def randomize(tag)
   sleep(rand() / 10.0)
-  random_merchant = @all_merchants['merchants_groceries'].sample if type == "groceries"
-  random_merchant = @all_merchants['merchants_misc'].sample if type == "misc"
-  random_merchant = @all_merchants['merchants_bills'].sample if type == "bills"
-  random_merchant = @all_merchants['merchants_cash'].sample if type == "cash"
-  random_transaction = "#{random_date_time()} #{random_merchant} #{type} "
+  if tag == "groceries"
+    random_merchant = @all_merchants['merchants_groceries'].sample
+    random_amount = (Random.rand(0.5...40.0)).round(2)
+  elsif tag == "misc"
+    random_merchant = @all_merchants['merchants_misc'].sample
+    random_amount = (Random.rand(0.1...20.0)).round(2)
+  elsif tag == "bills"
+    random_merchant = @all_merchants['merchants_bills'].sample
+    random_amount = (Random.rand(30..100.0)).round(2)
+  elsif tag == "cash"
+    random_merchant = @all_merchants['merchants_cash'].sample
+    random_amount = Random.rand(1...30)*10
+  elsif tag == "food_and_drink"
+    random_merchant = @all_merchants['merchants_food_and_drink'].sample
+    random_amount = (Random.rand(1..100.0)).round(2)
+  elsif tag == "fuel"
+    random_merchant = @all_merchants['merchants_fuel'].sample
+    random_amount = (Random.rand(30...50.0)).round(2)
+  end
+  random_transaction = [
+    random_merchant,
+    tag,
+    random_date_time().to_s,
+    random_amount
+  ]
   return random_transaction
 end
 
 
-10.times {p randomize("groceries")}
-10.times {p randomize("misc")}
-10.times {p randomize("bills")}
-10.times {p randomize("cash")}
+def randomise_and_seed(times, tag)
+times.times {|x|
+  result = randomize(tag)
+  merchant_x = Merchant.new({
+    "merchant_name" => result[0]
+    })
+  merchant_x.save
+  tag_x = Tag.new({
+    "tag_name" => result[1]
+    })
+    tag_x.save
+  transaction_x = Transaction.new({
+    "time_stamp" => result[2],
+    "amount" => result[3],
+    "merchant_id" => merchant_x.id,
+    "tag_id" => tag_x.id
+    })
+  transaction_x.save
+  }
+end
+#========================================================EXEC_SEED:
+randomise_and_seed(200, "groceries")
+randomise_and_seed(50, "misc")
+randomise_and_seed(50, "fuel")
+randomise_and_seed(90, "food_and_drink")
+randomise_and_seed(24, "bills")
+randomise_and_seed(100, "cash")
