@@ -91,7 +91,7 @@ save_merchants("merchants_cash")
   "groceries",
   "misc",
   "fuel",
-  "food_and_drink",
+  "food and drink",
   "bills",
   "cash"
 ]

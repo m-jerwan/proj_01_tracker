@@ -16,7 +16,7 @@ class Tag
   end
 
   def self.all
-    sql = "SELECT * FROM tags"
+    sql = "SELECT * FROM tags ORDER BY tag_name"
     hashes = SqlRunner.run(sql)
     result = hashes.map { |e| Tag.new(e)}
     return result
