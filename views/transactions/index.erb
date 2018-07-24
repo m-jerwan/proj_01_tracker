@@ -2,6 +2,7 @@
 <h1>Transactions</h1>
 
 <p><%=@now.strftime("%-B")%></p>
+
 <%last_month = @now.prev_month%>
 <p> <a href="transactions/<%=last_month.strftime("%-m")%>"> <%=last_month.strftime("%-B")%> </a> </p>
 <%two_months_before = last_month.prev_month%>
