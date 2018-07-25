@@ -4,13 +4,29 @@
 
 <h2>Available merchants:</h2>
 <%counter = 1%>
+<table>
+  <tr>
+    <th>No</th>
+    <th></th>
+    <th>Merchant</th>
+    <th></th>
+    <th>Actions</th>
+  </tr>
 <% for merchant in @merchants %>
-  <p><%=counter%>. <%= merchant.merchant_name %></p>
-  <form class= "" action= "/merchants/<%=merchant.id%>/edit" method= "post">
-    <input type="submit" value= "Edit">
-  </form>
-  <form class= "" action= "/merchants/<%=merchant.id%>/delete" method= "post">
-    <input type="submit" value= "Delete">
-  </form>
-  <%counter += 1%>
-<% end %>
+      <tr>
+        <td><%=counter%></td>
+        <td>|</td>
+        <td><%= merchant.merchant_name %></td>
+        <td>|</td>
+        <td><form class= "button" action= "/merchants/<%=merchant.id%>/edit" method= "post">
+          <input type="submit" value= "Edit">
+        </form></td>
+        <td>
+          <form class= "button" action= "/merchants/<%=merchant.id%>/delete" method= "post">
+            <input type="submit" value= "Delete">
+          </form>
+        </td>
+      </tr>
+      <%counter += 1%>
+  <%end%>
+</table>

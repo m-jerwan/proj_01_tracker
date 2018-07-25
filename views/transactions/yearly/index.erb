@@ -4,10 +4,14 @@
 <ul>
 <li><a href="/transactions"> Back to transactions </a> </li>
 <% if @year_on_page.to_s < @now.strftime("%Y") %>
-<li><a href="/transactions/year/<%=@year_on_page.to_i+1%>"> <%=@year_on_page.to_i+1%></a> </li>
+  <li><a href="/transactions/year/<%=@year_on_page.to_i+1%>"> <%=@year_on_page.to_i+1%></a> </li>
+  <li><a href="/transactions/year/<%=@year_on_page.to_i-1%>"> <%=@year_on_page.to_i-1%></a> </li>
+  <li><a href="/transactions/year/<%=@year_on_page.to_i-2%>"> <%=@year_on_page.to_i-2%></a> </li>
+<%else%>
+  <li><a href="/transactions/year/<%=@year_on_page.to_i%>"> <%=@year_on_page.to_i%></a> </li>
+  <li><a href="/transactions/year/<%=@year_on_page.to_i-1%>"> <%=@year_on_page.to_i-1%></a> </li>
+  <li><a href="/transactions/year/<%=@year_on_page.to_i-2%>"> <%=@year_on_page.to_i-2%></a> </li>
 <%end%>
-<li><a href="/transactions/year/<%=@year_on_page.to_i-1%>"> <%=@year_on_page.to_i-1%></a> </li>
-<li><a href="/transactions/year/<%=@year_on_page.to_i-2%>"> <%=@year_on_page.to_i-2%></a> </li>
 </ul>
 
 <h2> <%=@year_on_page%></h2>
@@ -36,7 +40,17 @@
         <td><a href="/merchants"> <%= transaction.find_merchant.merchant_name %></a></td>
         <td>|</td>
         <td><a href="/tags"><%= transaction.find_tag.tag_name.capitalize %></a></td>
+        <td>|</td>
+        <td>
+          <form class= "button" action= "/transactions/<%=transaction.id%>/edit" method= "post">
+            <input type="submit" value= "Edit">
+          </form>
+          <form class= "button" action= "/transactions/<%=transaction.id%>/delete" method= "post">
+            <input type="submit" value= "Delete">
+          </form>
+        </td>
       </tr>
     <%end%>
   <%end%>
-</table>
+  </table>
+  <a href="/transaction/new">Create transaction</a>

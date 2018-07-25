@@ -8,6 +8,7 @@
   <%  @month_back = @month_back.prev_month %>
   <li> <a href="<%=@month_back.strftime("%-m")%>"> <%=@month_back.strftime("%-B")%> </a> </li>
 <%end%>
+<li> <a href="/transactions/year/<%=@month_back.strftime('%Y')%>"> Yearly views </a> </li>
 </ul>
 
 <h2><%=@month_on_page_word%></h2>
@@ -36,7 +37,17 @@
         <td><a href="/merchants"> <%= transaction.find_merchant.merchant_name %></a></td>
         <td>|</td>
         <td><a href="/tags"><%= transaction.find_tag.tag_name.capitalize %></a></td>
+        <td>|</td>
+        <td>
+          <form class= "button" action= "/transactions/<%=transaction.id%>/edit" method= "post">
+            <input type="submit" value= "Edit">
+          </form>
+          <form class= "button" action= "/transactions/<%=transaction.id%>/delete" method= "post">
+            <input type="submit" value= "Delete">
+          </form>
+        </td>
       </tr>
     <%end%>
   <%end%>
 </table>
+<a href="/transaction/new">Create transaction</a>

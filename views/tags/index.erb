@@ -4,13 +4,28 @@
 
 <h2>Available tags:</h2>
 <%counter = 1%>
-<% for tag in @tags %>
-  <p><%=counter%>. <%= tag.tag_name.capitalize %></p>
-  <%counter += 1%>
-  <form class= "" action= "/tags/<%=tag.id%>/edit" method= "post">
-    <input type="submit" value= "Edit">
-  </form>
-  <form class= "" action= "/tags/<%=tag.id%>/delete" method= "post">
-    <input type="submit" value= "Delete">
-  </form>
-<% end %>
+<table>
+  <tr>
+    <th>No</th>
+    <th></th>
+    <th>Tag</th>
+    <th></th>
+    <th>Actions</th>
+  </tr>
+  <% for tag in @tags %>
+      <tr>
+        <td><%=counter%></td>
+        <td>|</td>
+        <td><%= tag.tag_name.capitalize %></td>
+        <td>|</td>
+        <td> <form class= "button" action= "/tags/<%=tag.id%>/edit" method= "post">
+            <input type="submit" value= "Edit">
+          </form>
+          <form class= "button" action= "/tags/<%=tag.id%>/delete" method= "post">
+            <input type="submit" value= "Delete">
+          </form>
+        </td>
+      </tr>
+      <%counter += 1%>
+  <%end%>
+</table>

@@ -2,17 +2,37 @@ require 'date'
 require_relative('../models/transaction.rb')
 require( 'pry-byebug' )
 
-
 get '/transactions' do
   @transactions = Transaction.all()
   @now = DateTime.now
   @month_back = @now.prev_month
   @this_month_no = @now.strftime("%-m")
   @month_minus_one_no = (@this_month_no.to_i - 1).to_s
-
   erb (:"transactions/index")
 end
 
+#NEW
+get "/transactions/new" do
+  erb (:"transactions/new")
+end # &CREATE
+post "/transactions" do
+  @transaction = Transaction.new(params)
+  @transaction.savransaction
+  erb (:"transactions/create")
+end
+
+
+
+
+
+
+
+
+
+
+
+
+#YEAR VIEW
 get '/transactions/year/:year' do
   @transactions = Transaction.all()
   @year_on_page = params['year']
@@ -20,9 +40,9 @@ get '/transactions/year/:year' do
   erb (:"transactions/yearly/index")
 end
 
+
 get '/transactions/:month' do
   @month_on_page = params['month']
-
   case params['month']
     when "1"
       @month_on_page_word = "January"

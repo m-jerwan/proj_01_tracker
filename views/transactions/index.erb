@@ -20,6 +20,8 @@
     <th>Merchant</th>
     <th></th>
     <th>Tag</th>
+    <th></th>
+    <th>Actions</th>
   </tr>
   <% for transaction in @transactions %>
 
@@ -34,7 +36,17 @@
         <td><a href="/merchants"> <%= transaction.find_merchant.merchant_name %></a></td>
         <td>|</td>
         <td><a href="/tags"><%= transaction.find_tag.tag_name.capitalize %></a></td>
+        <td>|</td>
+        <td>
+          <form class= "button" action= "/transactions/<%=transaction.id%>/edit" method= "post">
+            <input type="submit" value= "Edit">
+          </form>
+          <form class= "button" action= "/transactions/<%=transaction.id%>/delete" method= "post">
+            <input type="submit" value= "Delete">
+          </form>
+        </td>
       </tr>
     <%end%>
   <%end%>
 </table>
+<a href="/transaction/new">Create transaction</a>
