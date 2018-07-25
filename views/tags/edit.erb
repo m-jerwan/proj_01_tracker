@@ -1,0 +1,8 @@
+
+<h2>Edit <%=@tag.tag_name%> tag</h2>
+
+<form action= "/tags/<%=@tag.id%>" method= "post">
+  <label for="edit-tag"> Edit tag</label>
+  <input id= "edit-tag" type= "text" value= "<%=@tag.tag_name%>" name= "tag_name" />
+  <input type = "submit" value= "Edit tag">
+</form>

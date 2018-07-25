@@ -1,8 +1,16 @@
-<h1>Available tags:</h1>
+<h1>Tags</h1>
 
+<a href="/tags/new">Create tag</a>
 
+<h2>Available tags:</h2>
 <%counter = 1%>
 <% for tag in @tags %>
   <p><%=counter%>. <%= tag.tag_name.capitalize %></p>
   <%counter += 1%>
+  <form class= "" action= "/tags/<%=tag.id%>/edit" method= "post">
+    <input type="submit" value= "Edit">
+  </form>
+  <form class= "" action= "/tags/<%=tag.id%>/delete" method= "post">
+    <input type="submit" value= "Delete">
+  </form>
 <% end %>
