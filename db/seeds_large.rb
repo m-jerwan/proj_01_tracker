@@ -113,12 +113,12 @@ save_tags()
 def random_date_time
 
   #rand rand_month
-  rand_month = Random.rand(1..7)  #BluePeter coz COMPARISING STILL TO FI
+  rand_month = Random.rand(1..7)  #BluePeter coz COMPARISING STILL TO FIX
   #rand rand_day
   if rand_month == 2
     rand_day = Random.rand(1...28)
   elsif rand_month == 7
-    rand_day = Random.rand(1...24) #BluePeter coz COMPARISING STILL TO FI
+    rand_day = Random.rand(1...24) #BluePeter coz COMPARISING STILL TO FIX
   elsif rand_month == 1 || rand_month == 3 || rand_month == 5 || rand_month == 8 || rand_month == 10 || rand_month == 12
     rand_day = Random.rand(1...31)
   else
@@ -151,7 +151,7 @@ def randomize(tag)
   elsif tag == "cash"
     random_merchant = @all_merchants['merchants_cash'].sample
     random_amount = Random.rand(1...30)*10
-  elsif tag == "food_and_drink"
+  elsif tag == "food and drink"
     random_merchant = @all_merchants['merchants_food_and_drink'].sample
     random_amount = (Random.rand(1..100.0)).round(2)
   elsif tag == "fuel"
@@ -192,6 +192,6 @@ end
 randomise_and_seed(200, "groceries")
 randomise_and_seed(50, "misc")
 randomise_and_seed(50, "fuel")
-randomise_and_seed(90, "food_and_drink")
+randomise_and_seed(90, "food and drink")
 randomise_and_seed(24, "bills")
 randomise_and_seed(100, "cash")

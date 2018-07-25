@@ -1,0 +1,29 @@
+<%require( 'pry-byebug' )%>
+
+<h2>Edit transacion</h2>
+
+<form action= "/transactions/<%=@transaction.id%>" method= "post">
+
+  <label for="date-time-1"> Date of transaction</label>
+  <input id= "date-time-1" type= "date" value=<%=@transaction.time_stamp.strftime('%F')%> name= "date_time_1" />
+
+  <label for="date-time-2"> Date of transaction</label>
+  <input id= "date-time-2" type= "time"  value= "<%=@transaction.time_stamp.strftime('%H:%M')%>" name= "date_time_2" />
+
+  <label  for="amount"> Amount</label>
+  <input id= "amount"  value="<%=@transaction.amount%>" type= "number" min="0.01" step="0.01" name= "amount" />
+
+  <select name="merchant_id">
+      <% for merchant in @merchants %>
+      <option value="<%= merchant.id %>"><%= merchant.merchant_name %></option>
+      <% end %>
+    </select>
+
+  <select name="tag_id">
+      <% for tag in @tags %>
+      <option value="<%= tag.id %>"><%= tag.tag_name %></option>
+      <% end %>
+    </select>
+
+  <input type = "submit" value= "Edit">
+</form>

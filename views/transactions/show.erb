@@ -1,0 +1,1 @@
+<p>Transactions details has been updated to £<%=@transaction.amount%> spend in  :<%=@transaction.find_merchant.merchant_name%>: at :<%=@transaction.time_stamp.strftime('%H:%M , %y/%m/%d')%>: with tag :<%=@transaction.find_tag.tag_name.capitalize%>: </p>

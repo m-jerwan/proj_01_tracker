@@ -71,14 +71,16 @@ transaction_03 = Transaction.new({
 })
 
 transaction_01.save
-transaction_02.save
-transaction_03.save
+# transaction_02.save
+# transaction_03.save
 # p transaction_01.time_stamp.strftime("at %I:%M%p on %A")
-p Transaction.all
+
 #-----------------------------------OTHER:
+p Transaction.all
+transaction_01.merchant_id = merchant_04.id
+transaction_01.update
+p Transaction.all
 
-
-p this_month = DateTime.now.strftime("%m")
 
 # binding.pry
 nil

@@ -2,7 +2,7 @@
 
 <h1>Transactions</h1>
 <ul>
-<li> <a href="/transactions/<%=@month_back.strftime('%-m')%>"> Monthly views </a> </li>
+<li> <a href="/transactions/month/<%=@month_back.strftime('%-m')%>"> Monthly views </a> </li>
 <li> <a href="/transactions/year/<%=@month_back.strftime('%Y')%>"> Yearly views </a> </li>
 </ul>
 
@@ -49,4 +49,5 @@
     <%end%>
   <%end%>
 </table>
-<a href="/transactions/new">Create transaction</a>
+
+<a href="transactions/new">Create transaction</a>

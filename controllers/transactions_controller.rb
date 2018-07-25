@@ -24,17 +24,34 @@ post "/transactions" do
   erb (:"transactions/create")
 end
 
+#SHOW
+get '/transactions/:id' do
+  @transaction = Transaction.find(params['id'])
+  erb (:"transactions/show")
+end
 
+#edit
+post "/transactions/:id/edit" do
+  @transaction = Transaction.find(params['id'])
+  @merchants = Merchant.all()
+  @tags = Tag.all()
+  erb (:"transactions/edit")
+end # &UPDATE
+post "/transactions/:id" do
+  params['time_stamp'] = "#{params['date_time_1']} #{params['date_time_2']}"
+  transaction = Transaction.new(params)
+  transaction.update
+  redirect to "transactions"
+end
 
+#delete
+post "/transactions/:id/delete" do
+  transaction = Transaction.find(params['id'])
+  transaction.delete
+  redirect to "transactions"
+end
 
-
-
-
-
-
-
-
-
+#====================================OTHER:
 #YEAR VIEW
 get '/transactions/year/:year' do
   @transactions = Transaction.all()
@@ -44,7 +61,7 @@ get '/transactions/year/:year' do
 end
 
 
-get '/transactions/:month' do
+get '/transactions/month/:month' do
   @month_on_page = params['month']
   case params['month']
     when "1"

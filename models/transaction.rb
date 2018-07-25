@@ -3,7 +3,8 @@ require( 'pry-byebug' )
 
 
 class Transaction
-  attr_reader :id, :amount, :time_stamp
+  attr_reader :id
+  attr_accessor :amount, :time_stamp, :merchant_id, :tag_id
 
   def initialize(options)
     @id = options['id'].to_i if options['id']
@@ -12,8 +13,6 @@ class Transaction
     @merchant_id = options['merchant_id'].to_i
     @tag_id = options['tag_id'].to_i
   end
-
-
 
   #------------------------------------------~OTHER:
 
@@ -52,7 +51,9 @@ class Transaction
   end
 
   def update
-    #no update as violates foreign key violations
+    sql = "UPDATE transactions SET (time_stamp, amount, merchant_id, tag_id) = ($1,$2,$3,$4) WHERE id = $5"
+    values = [@time_stamp, @amount, @merchant_id, @tag_id, @id]
+    SqlRunner.run(sql, values)
   end
 
   def delete
