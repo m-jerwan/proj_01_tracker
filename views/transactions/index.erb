@@ -29,7 +29,7 @@
         <td>|</td>
         <td><%= transaction.time_stamp.strftime("%d.%m.%Y") %></td>
         <td>|</td>
-        <td><%= transaction.amount %></td>
+        <td>£ <%= transaction.amount %></td>
         <td>|</td>
         <td><a href="/merchants"> <%= transaction.find_merchant.merchant_name %></a></td>
         <td>|</td>
