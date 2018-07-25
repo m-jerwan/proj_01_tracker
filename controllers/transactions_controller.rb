@@ -13,11 +13,14 @@ end
 
 #NEW
 get "/transactions/new" do
+  @transactions = Transaction.all()
+  @merchants = Merchant.all()
+  @tags = Tag.all()
   erb (:"transactions/new")
 end # &CREATE
 post "/transactions" do
   @transaction = Transaction.new(params)
-  @transaction.savransaction
+  @transaction.save
   erb (:"transactions/create")
 end
 

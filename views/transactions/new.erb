@@ -1,0 +1,27 @@
+<%require( 'pry-byebug' )%>
+
+<h2>New transacion</h2>
+
+<form action= "/transactions" method= "post">
+
+  <label for="time-stamp"> Time of transaction</label>
+  <input id= "time-stamp" type= "date" name= "time_stamp" />
+
+  <label for="amount"> Amount</label>
+  <input id= "amount" type= "number" min="0.01" step="0.01" name= "amount" />
+
+  <select name="merchant_id">
+      <% for merchant in @merchants %>
+      <option value="<%= merchant.id %>"><%= merchant.merchant_name %></option>
+      <% end %>
+    </select>
+
+  <select name="tag_id">
+      <% for tag in @tags %>
+      <option value="<%= tag.id %>"><%= tag.tag_name %></option>
+      <% end %>
+    </select>
+
+  <input type = "submit" value= "Add transaction">
+
+</form>
