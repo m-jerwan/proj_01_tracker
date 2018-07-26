@@ -37,9 +37,12 @@
       </div>
     </section>
     <section class= "report mini info">
+
       <p><%=limit_tag_01 = Tag.find(1).tag_name.capitalize%> limit</p>
       <p>Exceeded by:</p>
+
       <p><%=Limit.monthly_spending_for("groceries")%></p>
+      
     </section>
     <section class= "report mini info">info2
     </section>

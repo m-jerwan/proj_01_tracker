@@ -68,5 +68,3 @@ class Transaction
   end
 
 end
-
-Transaction.all
