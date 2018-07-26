@@ -8,7 +8,6 @@
 
 <h2><%=@now.strftime("%B")%></h2>
 
-
 <table>
   <tr>
     <th>Time</th>
@@ -23,31 +22,42 @@
     <th></th>
     <th>Actions</th>
   </tr>
-  <% for transaction in @transactions %>
 
-    <% if transaction.time_stamp.strftime("%-m") == @now.strftime("%-m") %>
-      <tr>
-        <td><%= transaction.time_stamp.strftime("%H:%M") %></td>
-        <td>|</td>
-        <td><%= transaction.time_stamp.strftime("%d.%m.%Y") %></td>
-        <td>|</td>
-        <td>£ <%= transaction.amount %></td>
-        <td>|</td>
-        <td><a href="/merchants"> <%= transaction.find_merchant.merchant_name %></a></td>
-        <td>|</td>
-        <td><a href="/tags"><%= transaction.find_tag.tag_name.capitalize %></a></td>
+
+  <% for transaction in @transactions %>
+  <% if transaction.time_stamp.strftime("%-m") == @now.strftime("%-m") %>
+  <tr>
+    <td><%= transaction.time_stamp.strftime("%H:%M") %></td>
+    <td>|</td>
+    <td><%= transaction.time_stamp.strftime("%d.%m.%Y") %></td>
+    <td>|</td>
+    <td>£ <%= transaction.amount %></td>
+    <td>|</td>
+    <td>
+      <form class= "button merchant_by" action= "/transactions" method= "get">
+        <input id= "button_merchant_by" type= "hidden" value= "<%= transaction.find_merchant.merchant_name %>" name= "merchant_by" />
+        <input type="submit" value= "<%= transaction.find_merchant.merchant_name %>">
+      </form>
+      </td>
+      <td>|</td>
+      <td>
+        <form class= "button tag_by" action= "/transactions" method= "get">
+          <input id= "button_tag_by" type= "hidden" value= "<%= transaction.find_tag.tag_name %>" name= "tag_by" />
+          <input type="submit" value= "<%= transaction.find_tag.tag_name.capitalize %>">
+        </form>
+        </td>
         <td>|</td>
         <td>
-          <form class= "button" action= "/transactions/<%=transaction.id%>/edit" method= "post">
+          <form class= "button edit" action= "/transactions/<%=transaction.id%>/edit" method= "post">
             <input type="submit" value= "Edit">
           </form>
-          <form class= "button" action= "/transactions/<%=transaction.id%>/delete" method= "post">
+          <form class= "button delete" action= "/transactions/<%=transaction.id%>/delete" method= "post">
             <input type="submit" value= "Delete">
           </form>
         </td>
       </tr>
-    <%end%>
-  <%end%>
-</table>
+      <%end%>
+      <%end%>
+    </table>
 
-<a href="transactions/new">Create transaction</a>
+    <a href="transactions/new">Create transaction</a>
