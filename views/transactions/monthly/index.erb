@@ -22,15 +22,10 @@
 <table>
   <tr>
     <th>Time</th>
-    <th></th>
     <th>Date</th>
-    <th></th>
     <th>Amount</th>
-    <th></th>
     <th>Merchant</th>
-    <th></th>
     <th>Tag</th>
-    <th></th>
     <th>Actions</th>
   </tr>
 
@@ -38,25 +33,20 @@
     <% if transaction.time_stamp.strftime("%-m") == @month_on_page %>
       <tr>
         <td><%= transaction.time_stamp.strftime("%H:%M") %></td>
-        <td>|</td>
         <td><%= transaction.time_stamp.strftime("%d.%m.%Y") %></td>
-        <td>|</td>
         <td>£ <%= transaction.amount %></td>
-        <td>|</td>
         <td>
           <form class= "button merchant_by" action= "/transactions/month/<%@month_on_page%>/filter/<%= transaction.find_merchant.merchant_name %>" method= "get">
             <input id= "button_merchant_by" type= "hidden" value= "<%= transaction.find_merchant.merchant_name %>" name= "merchant_by" />
             <input type="submit" value= "<%= transaction.find_merchant.merchant_name %>">
           </form>
         </td>
-        <td>|</td>
         <td>
           <form class= "button tag_by" action= "/transactions/filter/<%= transaction.find_tag.tag_name %>" method= "get">
             <input id= "button_tag_by" type= "hidden" value= "<%= transaction.find_tag.tag_name %>" name= "tag_by" />
             <input type="submit" value= "<%= transaction.find_tag.tag_name.capitalize %>">
           </form>
         </td>
-        <td>|</td>
         <td>
           <form class= "button" action= "/transactions/<%=transaction.id%>/edit" method= "post">
             <input type="submit" value= "Edit">
@@ -65,7 +55,6 @@
             <input type="submit" value= "Delete">
           </form>
         </td>
-        <td>|</td>
       </tr>
     <%end%>
   <%end%>

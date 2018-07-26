@@ -1,20 +1,53 @@
 
 <div class= "master_flexbox">
   <div class= "stats_alerts" >
-    <section class= "report warning">warning1
+    <section class= "report info">
+
+      <%@monthly_total = 0%>
+        <% for transaction in @transactions %>
+          <% if transaction.time_stamp.strftime("%-m") == @now.strftime("%-m") %>
+            <%@monthly_total += transaction.amount%>
+          <%end%>
+        <%end%>
+        <p>Total spend for <%=@now.strftime("%B")%> so far:</p>
+        <p class="money-text">£<%=@monthly_total.round(2)%></p>
+
     </section>
-    <section class= "report info">info1
+    <section class= "report info">
+      <p>Income this month:</p>
+      <p class="money-text">£ 7000</p>
     </section>
-    <section class= "report warning">warning2
+    <section class= "report stats-long">
+      <p><span style="font-weight: 700">Limits:</span></p>
+      <div class="inside-stats-long">
+        <p><%=limit_tag_01 = Tag.find(1).tag_name.capitalize%>:</p>
+        <p class="money-text">£2000</p>
+      </div>
+      <div class="inside-stats-long">
+        <p><%=limit_tag_01 = Tag.find(2).tag_name.capitalize%>:</p>
+        <p class="money-text">£1500</p>
+      </div>
+      <div class="inside-stats-long">
+        <p><%=limit_tag_01 = Tag.find(3).tag_name.capitalize%>:</p>
+        <p class="money-text">£1500</p>
+      </div>
+      <div class="inside-stats-long">
+        <p><%=limit_tag_01 = Tag.find(4).tag_name.capitalize%>:</p>
+        <p class="money-text">£1500</p>
+      </div>
     </section>
-    <section class= "report info">info2
+    <section class= "report mini info">
+      <p><%=limit_tag_01 = Tag.find(1).tag_name.capitalize%> limit</p>
+      <p>Exceeded by:</p>
+      <p><%=Limit.monthly_spending_for("groceries")%></p>
     </section>
-    <section class= "report warning">warning3
+    <section class= "report mini info">info2
     </section>
-    <section class= "report info">info3
+    <section class= "report mini info">warning3
     </section>
-    <section class= "report stats_long">long stats
+    <section class= "report mini info">info3
     </section>
+
     <section class= "report warning">warning4
     </section>
     <section class= "report info">info4

@@ -1,23 +1,17 @@
 <h1>Merchants</h1>
 
-<a href="/merchants/new">Create merchant</a>
-
 <h2>Available merchants:</h2>
 <%counter = 1%>
 <table>
   <tr>
     <th>No</th>
-    <th></th>
     <th>Merchant</th>
-    <th></th>
     <th>Actions</th>
   </tr>
 <% for merchant in @merchants %>
       <tr>
         <td><%=counter%></td>
-        <td>|</td>
         <td><%= merchant.merchant_name %></td>
-        <td>|</td>
         <td><form class= "button" action= "/merchants/<%=merchant.id%>/edit" method= "post">
           <input type="submit" value= "Edit">
         </form></td>
@@ -30,3 +24,5 @@
       <%counter += 1%>
   <%end%>
 </table>
+
+<a href="/merchants/new">Create merchant</a>

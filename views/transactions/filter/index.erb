@@ -6,7 +6,16 @@
 <li> <a href="/transactions/year/<%=@month_back.strftime('%Y')%>"> Yearly views </a> </li>
 </ul>
 
-<h2><%=@now.strftime("%B")%></h2>
+<<%@monthly_total = 0%>
+  <% for transaction in @transactions %>
+  <% if transaction.find_merchant.merchant_name == @merchant_by || transaction.find_tag.tag_name == params['tag_by']%>
+    <% if transaction.time_stamp.strftime("%-m") == @now.strftime("%-m") %>
+      <%@monthly_total += transaction.amount%>
+    <%end%>
+  <%end%>
+<%end%>
+  <h2>Total for <%=@now.strftime("%B")%> so far: £<%=@monthly_total.round(2)%></h2>
+
 
 <table>
   <tr>
