@@ -1,4 +1,92 @@
+body {
+  margin: 0;
+  font-family: 'PT Sans', sans-serif;
+}
+
+/*===========================================  NAV */
+nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  background-color: #5D5E54;
+  margin: 0 0 2em 0 ;
+}
+
+nav a {
+  margin: 1em ;
+  color: #fff;
+  text-decoration: none;
+}
+ a:hover  {
+  color: #E37B40;
+}
+
+.a_longer {
+  margin: 1em 5em 0 5em;
+}
+
+/*===========================================  GLOBAL:*/
 
 .button {
   display: inline;
 }
+
+.all_content{
+  margin: auto;
+  width: 80%;
+}
+
+.master_flexbox {
+  margin: auto;
+  /* background-color: grey; */
+}
+
+.stats_alerts{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.report{
+  margin: 0.1em;
+  border-radius: 5px;
+  min-width: 48%;
+  min-height: 10em;
+  flex: 1;
+  /* border: 1px solid black; */
+}
+
+.info{
+  background-color: #46B29D;
+
+}
+
+.warning{
+  background-color: #DE5B49;
+
+}
+
+.stats_long {
+  min-width: 98%;
+  background-color: #537E96;
+}
+
+
+
+
+/*
+li a {
+    display: block;
+    color: #000;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+li a.active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+li a:hover:not(.active) {
+    background-color: #555;
+    color: white;
+} */

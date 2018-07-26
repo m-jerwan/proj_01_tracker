@@ -8,4 +8,6 @@ require_relative('controllers/transactions_controller')
 
 get '/' do
   erb (:index)
+
+  #for main index page/stats/alerts
 end
