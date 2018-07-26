@@ -2,21 +2,21 @@
 
 <div class= "master_flexbox">
 <div class= "stats_alerts" >
-<section class= "report info">
+<section class= "report info spending">
 
-<%@monthly_total = 0%>
-<% for transaction in @transactions %>
-<% if transaction.time_stamp.strftime("%-m") == @now.strftime("%-m") %>
-<%@monthly_total += transaction.amount%>
-<%end%>
-<%end%>
+  <%@monthly_total = 0%>
+  <% for transaction in @transactions %>
+    <% if transaction.time_stamp.strftime("%-m") == @now.strftime("%-m") %>
+      <%@monthly_total += transaction.amount%>
+    <%end%>
+  <%end%>
 <p>Total spend for <%=@now.strftime("%B")%> so far:</p>
 <p class="money-text">£<%=@monthly_total.round(2)%></p>
 
 </section>
 <section class= "report info">
   <p>Income this month:</p>
-  <p class="money-text">£ 2000</p>
+  <p class="money-text">£<%=@income = 2000%></p>
 </section>
 
 <section class= "report stats-long">
@@ -43,13 +43,13 @@
 <section class= "report mini warning">
   <p><%=limit_tag_01 = Tag.find(1).tag_name.capitalize%> limit</p>
   <p>exceeded by:</p>
-  <p>£<%=  0-(Limit.new.limit_01.to_i - Limit.monthly_spending_for(limit_tag_01 = Tag.find(1).tag_name)).round(2)%></p>
+  <p class="money-text">£<%=  0-(Limit.new.limit_01.to_i - Limit.monthly_spending_for(limit_tag_01 = Tag.find(1).tag_name)).round(2)%></p>
 </section>
 <%else%>
 <section class= "report mini info">
   <p><%=limit_tag_01 = Tag.find(1).tag_name.capitalize%> limit</p>
   <p>still to spend:</p>
-  <p>£<%= 0-(Limit.monthly_spending_for(limit_tag_01 = Tag.find(1).tag_name) - Limit.new.limit_01.to_i).round(2)%></p>
+  <p class="money-text">£<%= 0-(Limit.monthly_spending_for(limit_tag_01 = Tag.find(1).tag_name) - Limit.new.limit_01.to_i).round(2)%></p>
 </section>
 <%end%>
 
@@ -58,13 +58,13 @@
 <section class= "report mini warning">
   <p><%=limit_tag_02 = Tag.find(2).tag_name.capitalize%> limit</p>
   <p>exceeded by:</p>
-  <p>£<%=  0-(Limit.new.limit_02.to_i - Limit.monthly_spending_for(limit_tag_02 = Tag.find(2).tag_name)).round(2)%></p>
+  <p class="money-text">£<%=  0-(Limit.new.limit_02.to_i - Limit.monthly_spending_for(limit_tag_02 = Tag.find(2).tag_name)).round(2)%></p>
 </section>
 <%else%>
 <section class= "report mini info">
   <p><%=limit_tag_02 = Tag.find(2).tag_name.capitalize%> limit</p>
   <p>still to spend:</p>
-  <p>£<%= 0-(Limit.monthly_spending_for(limit_tag_02 = Tag.find(2).tag_name) - Limit.new.limit_02.to_i).round(2)%></p>
+  <p class="money-text">£<%= 0-(Limit.monthly_spending_for(limit_tag_02 = Tag.find(2).tag_name) - Limit.new.limit_02.to_i).round(2)%></p>
 </section>
 <%end%>
 
@@ -73,13 +73,13 @@
 <section class= "report mini warning">
   <p><%=limit_tag_04 = Tag.find(4).tag_name.capitalize%> limit</p>
   <p>exceeded by:</p>
-  <p>£<%=  0-(Limit.new.limit_04.to_i - Limit.monthly_spending_for(limit_tag_04 = Tag.find(4).tag_name)).round(2)%></p>
+  <p class="money-text">£<%=  0-(Limit.new.limit_04.to_i - Limit.monthly_spending_for(limit_tag_04 = Tag.find(4).tag_name)).round(2)%></p>
 </section>
 <%else%>
 <section class= "report mini info">
   <p><%=limit_tag_04 = Tag.find(4).tag_name.capitalize%> limit</p>
   <p>still to spend:</p>
-  <p>£<%= 0-(Limit.monthly_spending_for(limit_tag_04 = Tag.find(4).tag_name) - Limit.new.limit_04.to_i).round(2)%></p>
+  <p class="money-text">£<%= 0-(Limit.monthly_spending_for(limit_tag_04 = Tag.find(4).tag_name) - Limit.new.limit_04.to_i).round(2)%></p>
 </section>
 <%end%>
 
@@ -88,20 +88,20 @@
 <section class= "report mini warning">
   <p><%=limit_tag_03 = Tag.find(3).tag_name.capitalize%> limit</p>
   <p>exceeded by:</p>
-  <p>£<%=  0-(Limit.new.limit_03.to_i - Limit.monthly_spending_for(limit_tag_03 = Tag.find(3).tag_name)).round(2)%></p>
+  <p class="money-text">£<%=  0-(Limit.new.limit_03.to_i - Limit.monthly_spending_for(limit_tag_03 = Tag.find(3).tag_name)).round(2)%></p>
 </section>
 <%else%>
 <section class= "report mini info">
   <p><%=limit_tag_03 = Tag.find(3).tag_name.capitalize%> limit</p>
   <p>still to spend:</p>
-  <p>£<%= 0-(Limit.monthly_spending_for(limit_tag_03 = Tag.find(3).tag_name) - Limit.new.limit_03.to_i).round(2)%></p>
+  <p class="money-text">£<%= 0-(Limit.monthly_spending_for(limit_tag_03 = Tag.find(3).tag_name) - Limit.new.limit_03.to_i).round(2)%></p>
 </section>
 <%end%>
 
 
-
-<section class= "report stats-long">
-  <p>Other stats</p>
+<section class= "report mini-long stats-long">
+  <p>Still available to spend/save:</p>
+  <p class="money-text">£<%=@income-@monthly_total%></p>
 </section>
 </div>
 </div>

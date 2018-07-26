@@ -75,13 +75,15 @@ td {
   min-width: 18%;
 }
 
+
+
 .info{
   background-color: #46B29D;
 }
 
 .info p,
 .warning p {
-  margin-left: 3rem;
+  margin-left: 2rem;
 }
 
 .money-text{
@@ -96,37 +98,25 @@ td {
 
 .stats-long {
   min-width: 98%;
-  background-color: #537E96;
+  background-color: #899EB0;
   display: flex;
   flex-direction: row;
 }
 
 
 .inside-stats-long{
-  flex: 1;
-  min-width: 22%;
-
-}
-
-.stats-long p {
-  margin-left: 4rem;
   flex: 2;
 }
 
-/*
-li a {
-    display: block;
-    color: #000;
-    padding: 8px 16px;
-    text-decoration: none;
+.stats-long p {
+  margin-left: 2rem;
+  flex: 1;
 }
 
-li a.active {
-    background-color: #4CAF50;
-    color: white;
+.mini-long{
+min-height: 3.5rem;
 }
 
-li a:hover:not(.active) {
-    background-color: #555;
-    color: white;
-} */
+.spending {
+  background-color: #F1E4B3;
+}

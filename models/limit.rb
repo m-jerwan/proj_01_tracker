@@ -21,8 +21,8 @@ class  Limit
     @merchants = Merchant.all()
     @transactions = Transaction.all()
     @tags = Tag.all()
+    
     @monthly_spending_for = 0
-
     for transaction in @transactions
       if transaction.find_merchant.merchant_name == filter || transaction.find_tag.tag_name == filter
         if transaction.time_stamp.strftime("%-m") == @now.strftime("%-m")
@@ -32,6 +32,14 @@ class  Limit
     end
     return @monthly_spending_for
   end
+
+
+  def percentages
+
+  end
+
+
+
 
 end
 
