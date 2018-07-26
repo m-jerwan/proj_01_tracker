@@ -10,10 +10,10 @@ class  Limit
   attr_accessor :limit_01,:limit_02,:limit_03,:limit_04
 
   def initialize
-    @limit_01 = "600"
-    @limit_02 = "3500"
-    @limit_03 = "1000"
-    @limit_04 = "500"
+    @limit_01 = "200"
+    @limit_02 = "10"
+    @limit_03 = "100"
+    @limit_04 = "200"
   end
 
   def self.monthly_spending_for(filter)

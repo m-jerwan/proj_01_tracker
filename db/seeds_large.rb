@@ -144,19 +144,19 @@ def randomize(tag)
     random_amount = (Random.rand(0.5...40.0)).round(2)
   elsif tag == "misc"
     random_merchant = @all_merchants['merchants_misc'].sample
-    random_amount = (Random.rand(0.1...20.0)).round(2)
+    random_amount = (Random.rand(0.1...10.0)).round(2)
   elsif tag == "bills"
     random_merchant = @all_merchants['merchants_bills'].sample
-    random_amount = (Random.rand(30..100.0)).round(2)
+    random_amount = (Random.rand(30..80.0)).round(2)
   elsif tag == "cash"
     random_merchant = @all_merchants['merchants_cash'].sample
     random_amount = Random.rand(1...30)*10
   elsif tag == "food and drink"
     random_merchant = @all_merchants['merchants_food_and_drink'].sample
-    random_amount = (Random.rand(1..100.0)).round(2)
+    random_amount = (Random.rand(1..50.0)).round(2)
   elsif tag == "fuel"
     random_merchant = @all_merchants['merchants_fuel'].sample
-    random_amount = (Random.rand(30...50.0)).round(2)
+    random_amount = (Random.rand(30...40.0)).round(2)
   end
   random_transaction = [
     random_merchant,
@@ -189,9 +189,9 @@ times.times {|x|
   }
 end
 #========================================================EXEC_SEED:
-randomise_and_seed(200, "groceries")
-randomise_and_seed(50, "misc")
-randomise_and_seed(50, "fuel")
-randomise_and_seed(90, "food and drink")
-randomise_and_seed(24, "bills")
-randomise_and_seed(100, "cash")
+randomise_and_seed(20, "groceries")
+randomise_and_seed(10, "misc")
+randomise_and_seed(10, "fuel")
+randomise_and_seed(10, "food and drink")
+randomise_and_seed(6, "bills")
+randomise_and_seed(10, "cash")

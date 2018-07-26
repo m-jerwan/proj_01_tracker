@@ -1,102 +1,107 @@
+<%require( 'pry-byebug' )%>
 
 <div class= "master_flexbox">
-  <div class= "stats_alerts" >
-    <section class= "report info">
+<div class= "stats_alerts" >
+<section class= "report info">
 
-      <%@monthly_total = 0%>
-        <% for transaction in @transactions %>
-          <% if transaction.time_stamp.strftime("%-m") == @now.strftime("%-m") %>
-            <%@monthly_total += transaction.amount%>
-          <%end%>
-        <%end%>
-        <p>Total spend for <%=@now.strftime("%B")%> so far:</p>
-        <p class="money-text">£<%=@monthly_total.round(2)%></p>
+<%@monthly_total = 0%>
+<% for transaction in @transactions %>
+<% if transaction.time_stamp.strftime("%-m") == @now.strftime("%-m") %>
+<%@monthly_total += transaction.amount%>
+<%end%>
+<%end%>
+<p>Total spend for <%=@now.strftime("%B")%> so far:</p>
+<p class="money-text">£<%=@monthly_total.round(2)%></p>
 
-    </section>
-    <section class= "report info">
-      <p>Income this month:</p>
-      <p class="money-text">£ 7000</p>
-    </section>
-    <section class= "report stats-long">
-      <p><span style="font-weight: 700">Limits:</span></p>
-      <div class="inside-stats-long">
-        <p><%=limit_tag_01 = Tag.find(1).tag_name.capitalize%>:</p>
-        <p class="money-text">£<%=Limit.new.limit_01.to_i%></p>
-      </div>
-      <div class="inside-stats-long">
-        <p><%=limit_tag_01 = Tag.find(2).tag_name.capitalize%>:</p>
-        <p class="money-text">£<%=Limit.new.limit_02.to_i%></p>
-      </div>
-      <div class="inside-stats-long">
-        <p><%=limit_tag_01 = Tag.find(3).tag_name.capitalize%>:</p>
-        <p class="money-text">£<%=Limit.new.limit_03.to_i%></p>
-      </div>
-      <div class="inside-stats-long">
-        <p><%=limit_tag_01 = Tag.find(4).tag_name.capitalize%>:</p>
-        <p class="money-text">£<%=Limit.new.limit_04.to_i%></p>
-      </div>
-    </section>
-<%1.times do |x|%>
-<%y= x+1%>
-    <%if Limit.monthly_spending_for(limit_tag_01 = Tag.find(1).tag_name) <= Limit.new.limit_01.to_i  %>
-    <section class= "report mini warning">
-      <p><%=limit_tag_01 = Tag.find(1).tag_name.capitalize%> limit</p>
-      <p>exceeded by:</p>
-      <p>£<%=  (Limit.new.limit_01.to_i - Limit.monthly_spending_for(limit_tag_01 = Tag.find(1).tag_name)).round(2)%></p>
-          </section>
-    <%else%>
-      <section class= "report mini info">
-        <p><%=limit_tag_01 = Tag.find(1).tag_name.capitalize%> limit</p>
-        <p>still to spend:</p>
-        <p>£<%= (Limit.monthly_spending_for(limit_tag_01 = Tag.find(1).tag_name) - Limit.new.limit_01.to_i).round(2)%></p>
-    </section>
-      <%end%>
+</section>
+<section class= "report info">
+  <p>Income this month:</p>
+  <p class="money-text">£ 2000</p>
+</section>
+
+<section class= "report stats-long">
+  <p><span style="font-weight: 700">Limits:</span></p>
+  <div class="inside-stats-long">
+    <p><%=limit_tag_01 = Tag.find(1).tag_name.capitalize%>:</p>
+    <p class="money-text">£<%=Limit.new.limit_01.to_i%></p>
+  </div>
+  <div class="inside-stats-long">
+    <p><%=limit_tag_01 = Tag.find(2).tag_name.capitalize%>:</p>
+    <p class="money-text">£<%=Limit.new.limit_02.to_i%></p>
+  </div>
+  <div class="inside-stats-long">
+    <p><%=limit_tag_01 = Tag.find(4).tag_name.capitalize%>:</p>
+    <p class="money-text">£<%=Limit.new.limit_03.to_i%></p>
+  </div>
+  <div class="inside-stats-long">
+    <p><%=limit_tag_01 = Tag.find(3).tag_name.capitalize%>:</p>
+    <p class="money-text">£<%=Limit.new.limit_04.to_i%></p>
+  </div>
+</section>
+
+<%if Limit.monthly_spending_for(limit_tag_01 = Tag.find(1).tag_name) >= Limit.new.limit_01.to_i  %>
+<section class= "report mini warning">
+  <p><%=limit_tag_01 = Tag.find(1).tag_name.capitalize%> limit</p>
+  <p>exceeded by:</p>
+  <p>£<%=  0-(Limit.new.limit_01.to_i - Limit.monthly_spending_for(limit_tag_01 = Tag.find(1).tag_name)).round(2)%></p>
+</section>
+<%else%>
+<section class= "report mini info">
+  <p><%=limit_tag_01 = Tag.find(1).tag_name.capitalize%> limit</p>
+  <p>still to spend:</p>
+  <p>£<%= 0-(Limit.monthly_spending_for(limit_tag_01 = Tag.find(1).tag_name) - Limit.new.limit_01.to_i).round(2)%></p>
+</section>
 <%end%>
 
-<%if Limit.monthly_spending_for(limit_tag_02 = Tag.find(2).tag_name) <= Limit.new.limit_02.to_i  %>
+
+<%if Limit.monthly_spending_for(limit_tag_02 = Tag.find(2).tag_name) >= Limit.new.limit_02.to_i  %>
 <section class= "report mini warning">
   <p><%=limit_tag_02 = Tag.find(2).tag_name.capitalize%> limit</p>
   <p>exceeded by:</p>
-  <p>£<%=  (Limit.new.limit_02.to_i - Limit.monthly_spending_for(limit_tag_02 = Tag.find(2).tag_name)).round(2)%></p>
-      </section>
-<%else%>
-  <section class= "report mini info">
-    <p><%=limit_tag_02 = Tag.find(2).tag_name.capitalize%> limit</p>
-    <p>still to spend:</p>
-    <p>£<%= (Limit.monthly_spending_for(limit_tag_02 = Tag.find(2).tag_name) - Limit.new.limit_02.to_i).round(2)%></p>
+  <p>£<%=  0-(Limit.new.limit_02.to_i - Limit.monthly_spending_for(limit_tag_02 = Tag.find(2).tag_name)).round(2)%></p>
 </section>
-  <%end%>
+<%else%>
+<section class= "report mini info">
+  <p><%=limit_tag_02 = Tag.find(2).tag_name.capitalize%> limit</p>
+  <p>still to spend:</p>
+  <p>£<%= 0-(Limit.monthly_spending_for(limit_tag_02 = Tag.find(2).tag_name) - Limit.new.limit_02.to_i).round(2)%></p>
+</section>
+<%end%>
 
-  <%if Limit.monthly_spending_for(limit_tag_03 = Tag.find(3).tag_name) <= Limit.new.limit_03.to_i  %>
-  <section class= "report mini warning">
-    <p><%=limit_tag_03 = Tag.find(3).tag_name.capitalize%> limit</p>
-    <p>exceeded by:</p>
-    <p>£<%= (Limit.new.limit_03.to_i - Limit.monthly_spending_for(limit_tag_03 = Tag.find(3).tag_name)).round(2)%></p>
-        </section>
-  <%else%>
-    <section class= "report mini info">
-      <p><%=limit_tag_03 = Tag.find(3).tag_name.capitalize%> limit</p>
-      <p>still to spend:</p>
-      <p>£<%= (Limit.monthly_spending_for(limit_tag_03 = Tag.find(3).tag_name) - Limit.new.limit_03.to_i).round(2)%></p>
-  </section>
-    <%end%>
 
-    <%if Limit.monthly_spending_for(limit_tag_04 = Tag.find(4).tag_name) <= Limit.new.limit_04.to_i  %>
-    <section class= "report mini warning">
-      <p><%=limit_tag_04 = Tag.find(4).tag_name.capitalize%> limit</p>
-      <p>exceeded by:</p>
-      <p>£<%= (Limit.new.limit_04.to_i - Limit.monthly_spending_for(limit_tag_04 = Tag.find(4).tag_name)).round(2)%></p>
-          </section>
-    <%else%>
-      <section class= "report mini info">
-        <p><%=limit_tag_04 = Tag.find(4).tag_name.capitalize%> limit</p>
-        <p>still to spend:</p>
-        <p>£<%= (Limit.monthly_spending_for(limit_tag_04 = Tag.find(4).tag_name) - Limit.new.limit_04.to_i).round(2)%></p>
-    </section>
-      <%end%>
+<%if Limit.monthly_spending_for(limit_tag_04 = Tag.find(4).tag_name) >= Limit.new.limit_04.to_i  %>
+<section class= "report mini warning">
+  <p><%=limit_tag_04 = Tag.find(4).tag_name.capitalize%> limit</p>
+  <p>exceeded by:</p>
+  <p>£<%=  0-(Limit.new.limit_04.to_i - Limit.monthly_spending_for(limit_tag_04 = Tag.find(4).tag_name)).round(2)%></p>
+</section>
+<%else%>
+<section class= "report mini info">
+  <p><%=limit_tag_04 = Tag.find(4).tag_name.capitalize%> limit</p>
+  <p>still to spend:</p>
+  <p>£<%= 0-(Limit.monthly_spending_for(limit_tag_04 = Tag.find(4).tag_name) - Limit.new.limit_04.to_i).round(2)%></p>
+</section>
+<%end%>
 
-    <section class= "report stats-long">
-      <p>Other stats</p>
-    </section>
-  </div>
+
+<%if Limit.monthly_spending_for(limit_tag_03 = Tag.find(3).tag_name) >= Limit.new.limit_03.to_i  %>
+<section class= "report mini warning">
+  <p><%=limit_tag_03 = Tag.find(3).tag_name.capitalize%> limit</p>
+  <p>exceeded by:</p>
+  <p>£<%=  0-(Limit.new.limit_03.to_i - Limit.monthly_spending_for(limit_tag_03 = Tag.find(3).tag_name)).round(2)%></p>
+</section>
+<%else%>
+<section class= "report mini info">
+  <p><%=limit_tag_03 = Tag.find(3).tag_name.capitalize%> limit</p>
+  <p>still to spend:</p>
+  <p>£<%= 0-(Limit.monthly_spending_for(limit_tag_03 = Tag.find(3).tag_name) - Limit.new.limit_03.to_i).round(2)%></p>
+</section>
+<%end%>
+
+
+
+<section class= "report stats-long">
+  <p>Other stats</p>
+</section>
+</div>
 </div>
