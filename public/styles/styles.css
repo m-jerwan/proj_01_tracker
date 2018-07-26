@@ -79,7 +79,8 @@ td {
   background-color: #46B29D;
 }
 
-.info p {
+.info p,
+.warning p {
   margin-left: 4rem;
 }
 
