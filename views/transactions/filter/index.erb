@@ -1,4 +1,3 @@
-
 <%require( 'pry-byebug' )%>
 
 <h1>Transactions</h1>
@@ -7,15 +6,7 @@
 <li> <a href="/transactions/year/<%=@month_back.strftime('%Y')%>"> Yearly views </a> </li>
 </ul>
 
-
-<%@monthly_total = 0%>
-  <% for transaction in @transactions %>
-    <% if transaction.time_stamp.strftime("%-m") == @now.strftime("%-m") %>
-      <%@monthly_total += transaction.amount%>
-    <%end%>
-  <%end%>
-  <h2>Total for <%=@now.strftime("%B")%> so far: £<%=@monthly_total.round(2)%></h2>
-
+<h2><%=@now.strftime("%B")%></h2>
 
 <table>
   <tr>
@@ -31,9 +22,10 @@
     <th></th>
     <th>Actions</th>
   </tr>
-    <% for transaction in @transactions %>
-      <% if transaction.time_stamp.strftime("%-m") == @now.strftime("%-m") %>
 
+    <% for transaction in @transactions %>
+    <% if transaction.find_merchant.merchant_name == @merchant_by || transaction.find_tag.tag_name == params['tag_by']%>
+      <% if transaction.time_stamp.strftime("%-m") == @now.strftime("%-m") %>
           <tr>
             <td><%= transaction.time_stamp.strftime("%H:%M") %></td>
             <td>|</td>
@@ -42,14 +34,14 @@
             <td>£ <%= transaction.amount %></td>
             <td>|</td>
             <td>
-              <form class= "button merchant_by" action= "/transactions/filter/<%= transaction.find_merchant.merchant_name %>" method= "get">
+              <form class= "button merchant_by" action= "/transactions/merchant/<%@merchant_by%>" method= "get">
                 <input id= "button_merchant_by" type= "hidden" value= "<%= transaction.find_merchant.merchant_name %>" name= "merchant_by" />
                 <input type="submit" value= "<%= transaction.find_merchant.merchant_name %>">
               </form>
             </td>
             <td>|</td>
             <td>
-              <form class= "button tag_by" action= "/transactions/filter/<%= transaction.find_tag.tag_name %>" method= "get">
+              <form class= "button tag_by" action= "/transactions" method= "get">
                 <input id= "button_tag_by" type= "hidden" value= "<%= transaction.find_tag.tag_name %>" name= "tag_by" />
                 <input type="submit" value= "<%= transaction.find_tag.tag_name.capitalize %>">
               </form>
@@ -64,6 +56,7 @@
               </form>
             </td>
           </tr>
+        <%end%>
         <%end%>
       <%end%>
 </table>

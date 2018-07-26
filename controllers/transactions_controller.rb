@@ -12,11 +12,20 @@ get '/transactions' do
   #specify the merchant_by - default: all
   #specify the tag_by_by - default: all
   #get the tag and merchant from params
-  @merchant_by = params['merchant_by']; @tag_by = params['tags_by']
   #in index - for loop which will compare the transaction_by and tag_by
   #and show transacions for this tag/merchant
-
   erb (:"transactions/index")
+end
+
+#filter by tag
+get '/transactions/filter/:id' do
+  @transactions = Transaction.all()
+  @now = DateTime.now
+  @month_back = @now.prev_month
+  @this_month_no = @now.strftime("%-m")
+  @month_minus_one_no = (@this_month_no.to_i - 1).to_s
+  @merchant_by = params['merchant_by']; @tag_by = params['tags_by']
+  erb (:"transactions/filter/index")
 end
 
 #NEW
@@ -26,6 +35,7 @@ get "/transactions/new" do
   @tags = Tag.all()
   erb (:"transactions/new")
 end # &CREATE
+
 post "/transactions" do
   @transaction = Transaction.new(params)
   @transaction.save
