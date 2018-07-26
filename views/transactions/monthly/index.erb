@@ -37,14 +37,14 @@
         <td>£ <%= transaction.amount %></td>
         <td>|</td>
         <td>
-          <form class= "button merchant_by" action= "/transactions" method= "get">
+          <form class= "button merchant_by" action= "/transactions/month/<%=@month_on_page%>" method= "get">
             <input id= "button_merchant_by" type= "hidden" value= "<%= transaction.find_merchant.merchant_name %>" name= "merchant_by" />
             <input type="submit" value= "<%= transaction.find_merchant.merchant_name %>">
           </form>
           </td>
           <td>|</td>
           <td>
-            <form class= "button tag_by" action= "/transactions" method= "get">
+            <form class= "button tag_by" action= "/transactions/month/<%=@month_on_page%>" method= "get">
               <input id= "button_tag_by" type= "hidden" value= "<%= transaction.find_tag.tag_name %>" name= "tag_by" />
               <input type="submit" value= "<%= transaction.find_tag.tag_name.capitalize %>">
             </form>
